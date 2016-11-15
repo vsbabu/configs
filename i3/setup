@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TGT=~/.i3/
+SRC=`pwd`
+mkdir -p $TGT
+ln -s $SRC/config.mint $TGT/config
+ln -s $SRC/i3status.conf $TGT/i3status.conf
+
+# vim: ai ts=2 sw=2 et sts=2 ft=sh
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TGT=~/.leo/
+SRC=`pwd`
+mkdir -p $TGT
+ln -s $SRC/myLeoSettings.leo $TGT/myLeoSettings.leo
+
+# vim: ai ts=2 sw=2 et sts=2 ft=sh
+
