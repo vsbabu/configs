@@ -1,7 +1,6 @@
 # i3 config file
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 # This is primarily for Linux Mint default theme and color - 9ab87c
-#
 # Requires Font Awesome icons
 #
 set $mod Mod4
@@ -269,20 +268,14 @@ bar {
   workspace_buttons yes
 	colors {
 		separator #9ab87c
-		#background #000000
-		#statusline #DDDDDD
-		#focused_workspace #FFFFFF #9ab87c #000000
-		#active_workspace #000000 #A4A28D #FFFFFF
-		#inactive_workspace #A4A28D #000000 #DDDDDD
-		#urgent_workspace #9ab87c #900000 #FFFFFF
 
-    background #2d2d2d
-    statusline #ABABAB
-    separator #2d2d2d
+    background #ababab
+    statusline #2d2d2d
+    separator #9ab87c
 
     focused_workspace  #9ab87c #9ab87c #424242
     active_workspace   #2d2d2d #5f676a #dedede
-    inactive_workspace #424242 #424242 #ABABAB
+    inactive_workspace #ababab #ababab #424242
     urgent_workspace   #CA0021 #CA0021 #eeeeee
   }
 }
@@ -291,8 +284,8 @@ bar {
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id mate-settings-daemon
 exec --no-startup-id nm-applet
-# exec --no-startup-id redshift -l 12.9716:77.5946
-# exec --no-startup-id xautolock -time 10 -locker blurlock
+#exec --no-startup-id redshift -l 12.9716:77.5946
+#exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id ~/apps/bin/wallchanger
 
 #exec --no-startup-id conky
