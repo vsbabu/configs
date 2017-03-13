@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TGT=~/
+SRC=`pwd`
+ln -s $SRC/tmux.conf $TGT/.tmux.conf
+
+# vim: ai ts=2 sw=2 et sts=2 ft=sh
+
