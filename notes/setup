@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TGT=~/
+SRC=`pwd`
+ln -s $SRC/notes/notes-up ~/.local/share/notes-up
+
+# vim: ai ts=2 sw=2 et sts=2 ft=sh
+
