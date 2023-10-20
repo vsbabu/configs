@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans');
+/* :ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap */
+
+:root {
+  --ls-font-family: "Fira Sans";
+}
+
+/* I like these colors for my background than white */
+.white-theme,
+html[data-theme='light'] {
+  --ls-primary-background-color: #f8faf8 ; 
+  --ls-secondary-background-color: #e9ecef;   
+}
+/* #f8f9fa; #e9ecef */
+
+/* block properties are rarely needed while reading */
+.block-properties {display:none; }
+.timestamp div, .timestamp div a {font-size: 90%;}
+
+/* nice to have fixed width font in edit mode */
+textarea {font-family: "Consolas";}
+
+/* Ozean theme customizations: TODO labels take up space. Hide. Waiting checkbox to be colored a bit differently. */
+a.TODO, a.DOING, span.task-status.waiting, span.task-status.wait  { display: none; }
+.waiting .form-checkbox,
+.waiting .form-checkbox:focus {
+  background-color: var(--oz-yellow) !important;
+  border: 2px solid var(--ct-checkbox-color) !important;
+}
+
+a.tag[data-ref^="@"]:after { content:" 👤"; } 
+a.tag[data-ref^="@"] { background-color: #fdf6e3; color: black;}
+a.tag[data-ref="1-1"] { background-color: #ffc6e3; color: black;}
+a.tag[data-ref="meeting"] { background-color: #c6c6e3; color: black;}
+
+a.tag[data-ref^="pomo"]{ visibility: hidden; }
+a.tag[data-ref="pomo1"]:before {content: "🍅"; visibility: visible; }
+a.tag[data-ref="pomo2"]:before {content: "🍅🍅"; visibility: visible; }
+a.tag[data-ref="pomo3"]:before {content: "🍅🍅🍅"; visibility: visible; }
+a.tag[data-ref="pomo4"]:before {content: "🍅🍅🍅🍅"; visibility: visible; }
+a.tag[data-ref="moveo"]{ background-color: #c60303; color: white;}
+
+/* logseq tools work with .v- tags; hide those tag markers */
+a.tag[data-ref^=".v-"]{ visibility: hidden; }
