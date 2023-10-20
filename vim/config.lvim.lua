@@ -55,7 +55,7 @@ vim.wo.wrap = false
 
 lvim.plugins = {
   {"catppuccin/nvim", name="catppuccin"},
-
+  { "mrjones2014/nvim-ts-rainbow" },
   { -- python starter plugins
     "ChristianChiarulli/swenv.nvim",
     "stevearc/dressing.nvim",
@@ -69,6 +69,8 @@ if vim.g.is_wsl then
 else
   lvim.colorscheme = "catppuccin-latte"
 end
+
+lvim.builtin.treesitter.rainbow.enable = true
 
 -- begin: python starter lvim https://github.com/LunarVim/starter.lvim/tree/python-ide
 
