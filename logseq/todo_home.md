@@ -1,53 +1,67 @@
 ## 🎆Immediate #.v-kanban
-	- #+BEGIN_QUERY
+	- collapsed:: true
+	  #+BEGIN_QUERY
 	  {:title [:h3 "🔥Past due"]
-	      :query [:find (pull ?h [*])
-	              :in $ ?till
-	              :where
-	              [?h :block/marker ?m]
-	              [(contains? #{"LATER" "TODO" "WAITING" "DOING"} ?m)]
-	              (or-join [?h ?d]
-	                [?h :block/scheduled ?d]
-	                [?h :block/deadline ?d]
+	   :query [:find (pull ?b [*])
+	   :in $ % ?till
+	   :where
+	     [?b :block/marker ?m]
+	     [(contains? #{"LATER" "TODO" "WAITING" "DOING"} ?m)]
+	     (or-join [?b ?d]
+	       [?b :block/scheduled ?d]
+	       [?b :block/deadline ?d]
 	              )
-	              [(< ?d ?till)]
-	              
-	      ]
-	      :inputs [:today]
-	      :table-view? false
-	      :result-transform (fn [result] (sort-by 
-	       (fn [r] (get-in r [:block/scheduled])) 
-	       result)
-	      )
-	    ; don't show the parent blocks in the result !important, 
-	    ; due to result-transform the grouping is lost, and so you will 
-	    ; be left with a simple list of TODO items. having 
-	    ; those parents blocks mixed in may make the list 
-	    ; more confusing. (setting this to true won't show
-	    ; the page btw!)
-	    :breadcrumb-show? false
-	    :collapsed? false
+	     [(< ?d ?till)]
+	     (not 
+	         [?descendant :block/parent ?b]
+	         [?descendant :block/marker ?am]
+	         [(contains? #{"LATER" "TODO" "WAITING" "DOING"}  ?am)]
+	      )]
+	  :inputs
+	      [[[[ancestor ?b ?ancestor]
+	  				[?b :block/parent ?ancestor]]
+	  				[[ancestor ?b ?ancestor]
+	  				[?child :block/parent ?ancestor]
+	  				(ancestor ?b ?child)]] :today]
+	   
+	   :table-view? false
+	       :result-transform (fn [result] juxt(map (fn [m] (assoc m :block/collapsed? true)) (sort-by (juxt (fn [r] (get-in r [:block/scheduled])) (fn [r] (get-in r [:block/deadline])) ) result)))  ; Sort first by scheduled and then by deadline, collapse.
+	   
+	      :breadcrumb-show? false
+	      :collapsed? false
 	  }
 	  #+END_QUERY
 	- #+BEGIN_QUERY
 	  {:title [:h3 "📅 Next 5 days"]
-	      :query [:find (pull ?h [*])
-	              :in $ ?start ?till
-	              :where
-	              [?h :block/marker ?m]
-	              [(contains? #{"LATER" "TODO" "WAITING" "DOING"} ?m)]
-	              (or-join [?h ?d]
-	                [?h :block/scheduled ?d]
-	                [?h :block/deadline ?d]
+	   :query [:find (pull ?b [*])
+	   :in $ % ?start ?till
+	   :where
+	     [?b :block/marker ?m]
+	     [(contains? #{"LATER" "TODO" "WAITING" "DOING"} ?m)]
+	     (or-join [?b ?d]
+	       [?b :block/scheduled ?d]
+	       [?b :block/deadline ?d]
 	              )
-	              [(>= ?d ?start)]
-	              [(< ?d ?till)]
-	              
-	      ]
-	      :inputs [:today :5d-after]
-	      :table-view? false
-	      :result-transform (fn [result] (sort-by (fn [r] (get-in r [:block/scheduled])) result)) ;
-	      :breadcrumb-show? false
+	     [(>= ?d ?start)]
+	     [(< ?d ?till)]
+	     (not 
+	         ;; If children are there, show only those - ie., don't show current block if children in pending states exist.
+	         ;; This has a problem though. if parent is due in the time frame, but children are due later, then this will
+	         ;; show neither parent, nor children. Ideally, in that situation, a parent should be shown with a data issue flag.
+	         [?descendant :block/parent ?b]
+	         [?descendant :block/marker ?am]
+	         [(contains? #{"LATER" "TODO" "WAITING" "DOING"}  ?am)]
+	      )]
+	  :inputs
+	      [[[[ancestor ?b ?ancestor]
+	  				[?b :block/parent ?ancestor]]
+	  				[[ancestor ?b ?ancestor]
+	  				[?child :block/parent ?ancestor]
+	  				(ancestor ?b ?child)]] :today :15d-after]
+	   
+	   :table-view? false
+	       :result-transform (fn [result] juxt(map (fn [m] (assoc m :block/collapsed? true)) (sort-by (juxt (fn [r] (get-in r [:block/scheduled])) (fn [r] (get-in r [:block/deadline])) ) result)))  ; Sort first by scheduled and then by deadline, collapse.
+	       :breadcrumb-show? false
 	      :collapsed? false
 	  }
 	  #+END_QUERY
@@ -55,23 +69,38 @@
 	- #+BEGIN_QUERY
 	  {:title [:h3 "⏰ Planned"]
 	   :query [:find (pull ?b [*])
-	   :in $ ?start
+	   :in $ % ?start
 	   :where
-	     [?b :block/marker ?marker]
-	     [(contains? #{"TODO" "LATER" "WAITING" "DOING"} ?marker)]  
-	     [?b :block/scheduled ?d]  
-	     [(>= ?d ?start)] 
-	         ;this is to avoid duplicates in next 5d query and here
+	      [?b :block/marker ?m]
+	      [(contains? #{"LATER" "TODO" "WAITING" "DOING"} ?m)]
+	      (or-join [?b ?d]
+	          [?b :block/scheduled ?d]
+	       )
+	      [(>= ?d ?start)] 
+	      (not 
+	         [?descendant :block/parent ?b]
+	         [?descendant :block/marker ?am]
+	         [(contains? #{"LATER" "TODO" "WAITING" "DOING"}  ?am)]
+	      )
 	    ]
-	   :result-transform (fn [result] (
-	                 sort-by (
-	                      fn [r] (get-in r [:block/scheduled])
-	                      ) result
-	                 )) 
-	   :table-view? false
-	   :inputs [:5d-after]
-	   :breadcrumb-show? false  
-	   :collapsed? false
+	    :inputs
+	      [[[[ancestor ?b ?ancestor]
+	  				[?b :block/parent ?ancestor]]
+	  				[[ancestor ?b ?ancestor]
+	  				[?child :block/parent ?ancestor]
+	  				(ancestor ?b ?child)]] :5d-after]
+	    :result-transform (fn [result] juxt
+	    (
+	      map (fn [m] (assoc m :block/collapsed? true)) 
+	      (sort-by (juxt 
+	          (fn [r] (get-in r [:block/scheduled])) 
+	          (fn [r] (get-in r [:block/deadline])) 
+	          ) 
+	      result))
+	    )  ; Sort first by scheduled and then by deadline, collapse. 
+	    :table-view? false
+	    :breadcrumb-show? false  
+	    :collapsed? false
 	  }
 	  #+END_QUERY
 	- #+BEGIN_QUERY
@@ -87,8 +116,6 @@
 	    :result-transform (fn [result] (sort-by (fn [r] (get-in r [:block/deadline])) result))
 	    :breadcrumb-show? false
 	    :table-view? false
-	   :inputs [:today+30d] 
+	   :inputs [:30d-after] 
 	  }
 	  #+END_QUERY
-
-
