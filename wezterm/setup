@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TGT=~/
+SRC=`pwd`
+ln -s $SRC/wezterm.conf $TGT/.wezterm.conf
+
+# vim: ai ts=2 sw=2 et sts=2 ft=s
