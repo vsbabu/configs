@@ -15,15 +15,13 @@ general {
 }
 
 
-order += "wireless wlp2s0"
-#order += "cpu_usage"
+order += "wireless wlp0s20f3"
 order += "load"
 order += "battery 0"
 order += "tztime local"
 
 
 wireless wlp2s0 {
-  #format_up = "W: (%quality at %essid) %ip"
   format_up = " %quality"
   format_down = "  down"
 }
