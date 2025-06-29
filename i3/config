@@ -34,8 +34,9 @@ bindsym $mod+q kill
 
 # Start Applications
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+b exec opera
 bindsym $mod+b exec $HOME/.local/bin/zen
-bindsym $mod+Shift+b exec microsoft-edge
+#bindsym $mod+Shift+b exec microsoft-edge
 bindsym $mod+f exec nemo --no-desktop
 bindsym $mod+r exec rofi -show-icons -show combi -font 'ComicShannsMono Nerd Font 14'
 bindsym $mod+o exec libreoffice
@@ -136,8 +137,10 @@ bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
 assign [class="(?i)terminal"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="(?i)zen"] $ws2
+assign [class="(?i)brave"] $ws2
 assign [class="(?i)edge"] $ws2
 assign [class="(?i)chrome"] $ws2
+assign [class="(?i)opera"] $ws2
 assign [class="(?i)idea"] $ws3
 assign [class="(?i)vim"] $ws3
 assign [class="(?i)Code"] $ws3
