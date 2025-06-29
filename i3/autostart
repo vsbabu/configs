@@ -2,9 +2,7 @@
 # Autostart applications
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
-#exec --no-startup-id xrandr --output eDP-1 --scale 0.65x0.65 --right-of HDMI-1 &
-#exec --no-startup-id $HOME/.local/bin/set_displays.sh 0 &
-exec --no-startup-id feh --bg-scale $HOME/Pictures/wallpapers/catppuccin_space.png &
+exec --no-startup-id $HOME/.local/bin/set_wallpaper.sh &
 exec --no-startup-id i3-sensible-terminal &
 
 # vim: syntax=i3config:
