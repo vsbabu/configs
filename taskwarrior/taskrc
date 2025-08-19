@@ -1,23 +1,3 @@
-# [Created by task 2.5.1 6/20/2016 18:04:32]
-# Taskwarrior program configuration file.
-# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-color',
-# 'man task-sync' or 'man taskrc'
-
-# Here is an example of entries that use the default, override and blank values
-#   variable=foo   -- By specifying a value, this overrides the default
-#   variable=      -- By specifying no value, this means no default
-#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
-
-# Use the command 'task show' to see all defaults and overrides
-
-# Files
 data.location=~/.task
-include ~/.linuxbrew/Cellar/task/2.5.1/share/doc/task/rc/solarized-dark-256.theme
-
-taskd.server=taskwarrior.inthe.am:53589
-taskd.key=~/.task\/private.key.pem
-taskd.certificate=~/.task\/private.certificate.pem
-taskd.ca=~/.task\/ca.cert.pem
-taskd.credentials=inthe_am\/vsbabu\/7d26ce18-3da5-4216-931f-6f848dd2449e
-taskd.trust=ignore hostname
+include dark-gray-256.theme
 
