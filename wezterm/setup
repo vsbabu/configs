@@ -2,8 +2,8 @@
 
 TGT=~/
 SRC=`pwd`
-ln -s $SRC/wezterm.conf $TGT/.wezterm.conf
-mkdir -p ~/.config/wezterm
+ln -s $SRC/wezterm.lua $TGT/.wezterm.lua
+mkdir -p ~/.config/wezterm/colors
 ln -s $SRC/sv_common.lua ~/.config/wezterm/sv_common.lua
 ln -s $SRC/colors/onenord.toml ~/.config/wezterm/colors/onenord.toml
 

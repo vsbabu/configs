@@ -134,7 +134,7 @@ function module.apply_to_config(config)
 
 	config.warn_about_missing_glyphs = false
 	config.window_background_opacity = 1.0
-	config.initial_rows = 24
-	config.initial_cols = 80
+	config.initial_rows = 28
+	config.initial_cols = 120
 end
 return module
