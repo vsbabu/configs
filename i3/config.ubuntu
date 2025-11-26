@@ -1,0 +1,39 @@
+set $base      #222222  
+set $inactive_base #333333
+set $text    #ffffff  
+set $mantle     #ff8c00
+set $crust   #ffffff
+set $urgent_base     #900000
+set $urgent_text   #ffffff
+
+bar {
+id bar-1
+  status_command i3status -c ~/.i3/i3status.conf
+  font pango:FontAwesome, ComicShannsMono Nerd Font bold 12
+  mode dock
+  position bottom
+  strip_workspace_numbers no
+  workspace_buttons yes
+  colors {
+      background         $base
+      statusline         $text
+      focused_statusline $text
+      focused_separator  $base
+
+      # target           border bg        text
+      focused_workspace  $base  $mantle   $crust
+      active_workspace   $base  $mantle $text
+      inactive_workspace $base  $base     $text
+      urgent_workspace   $base  $urgent_base      $urgent_text
+
+  }
+}
+# target                 title     bg    text   indicator  border
+client.focused           $base $base $text  $base $base
+client.focused_inactive  $inactive_base $base $text  $inactive_base $inactive_base
+client.unfocused         $inactive_base $base $text  $inactive_base $inactive_base
+client.urgent            $urgent_text    $urgent_base $urgent_text $urgent_base $urgent_base
+client.placeholder       $base $base $text  $base $base
+client.background        $base
+
+# vim: syntax=i3config:

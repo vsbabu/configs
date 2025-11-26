@@ -6,12 +6,13 @@ set $alt Mod1
 set $float floating enable border pixel 0
 set $move move container to workspace
 
-gaps outer 10px
+gaps outer 4px
 gaps inner 10px
+# change this to on to remove gaps if only one window is there in the container
 smart_gaps on
 
-default_border pixel 2
 # change borders
+default_border pixel 2
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
@@ -34,9 +35,9 @@ bindsym $mod+q kill
 
 # Start Applications
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+b exec opera
+#bindsym $mod+Shift+b exec opera
 bindsym $mod+b exec $HOME/.local/bin/zen
-#bindsym $mod+Shift+b exec microsoft-edge
+bindsym $mod+Shift+b exec microsoft-edge
 bindsym $mod+f exec nemo --no-desktop
 bindsym $mod+r exec rofi -show-icons -show combi -font 'ComicShannsMono Nerd Font 14'
 bindsym $mod+o exec libreoffice
@@ -74,29 +75,21 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # ###### --- container operations ---------
-# split in horizontal orientation
 bindsym $mod+h split h;exec notify-send 'tile horizontally'
-# split in vertical orientation
 bindsym $mod+v split v;exec notify-send 'tile vertically'
-
-# toggle fullscreen mode for the focused container
 bindsym $mod+F11 fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-
-# focus the parent container
 bindsym $mod+a focus parent
 
 # Workspace names
-set $ws1 "1:  shell"
-set $ws2 "2:  browse"
-set $ws3 "3:  code" 
-set $ws4 "4:  think"
-set $ws5 "5:  write"
-set $ws6 "6:  comms"
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
+set $ws6 "6:  "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -143,6 +136,7 @@ assign [class="(?i)chrome"] $ws2
 assign [class="(?i)opera"] $ws2
 assign [class="(?i)idea"] $ws3
 assign [class="(?i)vim"] $ws3
+assign [class="(?i)nvim"] $ws3
 assign [class="(?i)Code"] $ws3
 assign [class="(?i)xmind"] $ws4
 assign [class="(?i)emacs"] $ws4
@@ -178,7 +172,7 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec i3-msg exit
 
-# Set shut down, restart and locking features
+# set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
@@ -195,7 +189,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-# Resize window (you can also use the mouse for that)
+# resize window (you can also use the mouse for that)
 bindsym $mod+z mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -224,7 +218,7 @@ bindsym $alt+L exec i3lock -i $HOME/Pictures/wallpapers/catppuccin_mint-black-4k
 
 bindsym $alt+b bar mode toggle bar-1
 
-include ~/Documents/GitHub/configs/i3/config.catppuccin
+include ~/Documents/GitHub/configs/i3/config.ubuntu
 include ~/Documents/GitHub/configs/i3/autostart
 
 # vim: syntax=i3config:
