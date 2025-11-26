@@ -3,5 +3,8 @@
 TGT=~/
 SRC=`pwd`
 ln -s $SRC/wezterm.conf $TGT/.wezterm.conf
+mkdir -p ~/.config/wezterm
+ln -s $SRC/sv_common.lua ~/.config/wezterm/sv_common.lua
+ln -s $SRC/colors/onenord.toml ~/.config/wezterm/colors/onenord.toml
 
 # vim: ai ts=2 sw=2 et sts=2 ft=s
