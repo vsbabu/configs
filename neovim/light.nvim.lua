@@ -6,9 +6,8 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = -1
 vim.opt.number = true
--- vim.cmd("syntax on | colorscheme habamax | highlight Normal guifg=#ffaf00 guibg=#303446 ")
--- vim.cmd("syntax on | colorscheme habamax | highlight Normal guifg=#e5e9f0 guibg=#2e3440 ")
-vim.cmd("syntax on | colorscheme habamax ")
+-- vim.cmd("syntax on | colorscheme delek | highlight Normal guifg=#ffaf00 guibg=#303446 ")
+vim.cmd("syntax on | colorscheme morning | highlight Normal guifg=#000000 guibg=#eff1f5 ")
 vim.keymap.set("n", "<space>y", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
 end)

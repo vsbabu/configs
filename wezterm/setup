@@ -2,6 +2,9 @@
 
 TGT=~/
 SRC=`pwd`
+rm -f $TGT/.wezterm.lua
+rm -fR ~/.config/wezterm/
+
 ln -s $SRC/wezterm.lua $TGT/.wezterm.lua
 mkdir -p ~/.config/wezterm/colors
 ln -s $SRC/sv_common.lua ~/.config/wezterm/sv_common.lua
