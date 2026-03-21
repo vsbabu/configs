@@ -26,7 +26,7 @@
 <v t="vsbabu.20250916090450.4"><vh>@string cupertinoblue = #8fa1b3</vh></v>
 <v t="vsbabu.20250916090450.5"><vh>@string mintgreen = #9ab87c</vh></v>
 <v t="vsbabu.20250916090735.1"><vh>@string yaruorange = #e95420</vh></v>
-<v t="vsbabu.20250916090450.6"><vh>@string highlightbg = @yaruorange</vh></v>
+<v t="vsbabu.20250916090450.6"><vh>@string highlightbg = @manjarogreen</vh></v>
 <v t="vsbabu.20250916091627.1"><vh>@string highlightfg = #ffffff</vh></v>
 <v t="vsbabu.20250916090450.7"><vh>Color Customizations using variables above</vh>
 <v t="vsbabu.20250916090450.8"><vh>@color body-sel-bg = @highlightbg</vh></v>
