@@ -2,9 +2,6 @@
 bar {
   id bar-1
   status_command i3status -c ~/.config/i3/i3status.conf
-  #	wheel_up_cmd nop
-  #	wheel_down_cmd nop
-  #font pango:Cantarell,Icons 9
   font pango:FontAwesome, Monaco bold 10
   mode dock
   position bottom

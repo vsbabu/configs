@@ -4,7 +4,7 @@ TGT=~/.config/i3/
 SRC=$(pwd)
 mkdir -p $TGT
 ln -s $SRC/config $TGT/config
-ln -s $SRC/config.dark.mint $TGT/config.color
-ln -s $SRC/i3status.catppuccin $TGT/i3status.conf
+ln -s $SRC/config.color.darkmint $TGT/config.color
+ln -s $SRC/i3status.conf $TGT/i3status.conf
 
 # vim: ai ts=2 sw=2 et sts=2 ft=sh
