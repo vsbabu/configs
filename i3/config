@@ -83,13 +83,16 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 
+#
 # Workspace names
 set $ws1 "1:  "
-set $ws2 "2:  "
-set $ws3 "3:  "
+set $ws2 "2:󰇧  "
+set $ws3 "3:󰘦  "
 set $ws4 "4:  "
 set $ws5 "5:  "
 set $ws6 "6:  "
+set $ws7 "7:  "
+set $ws8 "8:󱇙  "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -98,8 +101,8 @@ bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
@@ -112,8 +115,8 @@ bindsym $mod+Ctrl+3 move container to workspace $ws3
 bindsym $mod+Ctrl+4 move container to workspace $ws4
 bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace number 7
-bindsym $mod+Ctrl+8 move container to workspace number 8
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace 1
@@ -122,8 +125,8 @@ bindsym $mod+Shift+3 move container to workspace $ws3; workspace 3
 bindsym $mod+Shift+4 move container to workspace $ws4; workspace 4
 bindsym $mod+Shift+5 move container to workspace $ws5; workspace 5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace 6
-bindsym $mod+Shift+7 move container to workspace number 7; workspace 7
-bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace 7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace 8
 
 
 # Open applications on specific workspaces
@@ -214,7 +217,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $alt+L exec i3lock -i $HOME/Pictures/wallpapers/catppuccin_mint-black-4k.png -c 000000
+bindsym $alt+L exec i3lock -i /usr/share/backgrounds/linuxmint/sele_linuxmint.png -c 000000
 
 bindsym $alt+b bar mode toggle bar-1
 
