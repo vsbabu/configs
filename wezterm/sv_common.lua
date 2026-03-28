@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local module = {}
 
 function module.apply_to_config(config)
-	config.color_scheme = "catppuccin-latte"
+	config.color_scheme = "catppuccin-frappe"
 	-- config.color_scheme = "Tokyo Night Light (Gogh)"
 	-- config.color_scheme = "Tomorrow (Gogh)"
 	--[[
@@ -136,5 +136,13 @@ function module.apply_to_config(config)
 	config.window_background_opacity = 1.0
 	config.initial_rows = 28
 	config.initial_cols = 120
+
+	config.ssh_domains = {
+		{
+			name = "dell",
+			remote_address = "dell",
+			username = "vsbabu",
+		},
+	}
 end
 return module
