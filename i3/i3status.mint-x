@@ -15,16 +15,16 @@ general {
 }
 
 
-order += "wireless wlp0s20f3"
+#order += "wireless wlp0s20f3"
 order += "load"
 order += "battery 0"
 order += "tztime local"
 
 
-wireless wlp2s0 {
-  format_up = " %quality"
-  format_down = "  down"
-}
+#wireless wlp2s0 {
+#  format_up = " %quality"
+#  format_down = "  down"
+#}
 
 battery 0 {
   integer_battery_capacity = true

@@ -1,17 +1,17 @@
 
 bar {
-	id bar-1
-  status_command i3status -c ~/.i3/i3status.conf
+  id bar-1
+  status_command i3status -c ~/.config/i3/i3status.conf
   #	wheel_up_cmd nop
   #	wheel_down_cmd nop
-	#font pango:Cantarell,Icons 9
-	font pango:FontAwesome, Monaco bold 10
-	mode dock
+  #font pango:Cantarell,Icons 9
+  font pango:FontAwesome, Monaco bold 10
+  mode dock
   position bottom
   strip_workspace_numbers no
   workspace_buttons yes
-	colors {
-		separator #9ab87c
+  colors {
+    separator #9ab87c
 
     background #2d2d2d
     statusline #ABABAB

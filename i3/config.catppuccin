@@ -28,27 +28,27 @@ set $crust #232634
 # -- end catppuccin-frappe
 
 bar {
-	id bar-1
-  status_command i3status -c ~/.i3/i3status.conf
-	font pango:FontAwesome, ComicShannsMono Nerd Font bold 12
-	mode dock
-  position bottom
-  strip_workspace_numbers no
-  workspace_buttons yes
-	colors {
-    # catppuccin-frappe
-    background         $base
-    statusline         $text
-    focused_statusline $text
-    focused_separator  $base
+  id bar-1
+    status_command i3status -c ~/.config/i3/i3status.conf
+    font pango:FontAwesome, ComicShannsMono Nerd Font bold 12
+    mode dock
+    position bottom
+    strip_workspace_numbers no
+    workspace_buttons yes
+    colors {
+# catppuccin-frappe
+      background         $base
+        statusline         $text
+        focused_statusline $text
+        focused_separator  $base
 
-    # target           border bg        text
-    focused_workspace  $base  $mauve    $crust    #was mauve for frappe, green for mintish
-    active_workspace   $base  $surface2 $text
-    inactive_workspace $base  $base     $text
-    urgent_workspace   $base  $red      $crust
+# target           border bg        text
+        focused_workspace  $base  $mauve    $crust    #was mauve for frappe, green for mintish
+        active_workspace   $base  $surface2 $text
+        inactive_workspace $base  $base     $text
+        urgent_workspace   $base  $red      $crust
 
-  }
+    }
 }
 # catppuccin-frappe
 # target                 title     bg    text   indicator  border

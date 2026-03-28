@@ -1,9 +1,10 @@
 #!/bin/bash
 
-TGT=~/.i3/
+TGT=~/.config/i3/
 SRC=$(pwd)
 mkdir -p $TGT
 ln -s $SRC/config $TGT/config
+ln -s $SRC/config.dark.mint $TGT/config.color
 ln -s $SRC/i3status.catppuccin $TGT/i3status.conf
 
 # vim: ai ts=2 sw=2 et sts=2 ft=sh

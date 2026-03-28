@@ -7,8 +7,8 @@ set $urgent_base     #900000
 set $urgent_text   #ffffff
 
 bar {
-id bar-1
-  status_command i3status -c ~/.i3/i3status.conf
+  id bar-1
+  status_command i3status -c ~/.config/i3/i3status.conf
   font pango:FontAwesome, ComicShannsMono Nerd Font bold 12
   mode dock
   position bottom

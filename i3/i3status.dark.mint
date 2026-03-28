@@ -7,6 +7,7 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+  output_format = "i3bar"
   colors = true
   interval = 5
   color_good = "#9ab87c"
@@ -15,16 +16,16 @@ general {
 }
 
 
-order += "wireless wlp0s20f3"
+#order += "wireless wlp0s20f3"
 order += "load"
 order += "battery 0"
 order += "tztime local"
 
 
-wireless wlp2s0 {
-  format_up = " %quality"
-  format_down = "  down"
-}
+#wireless wlp0s20f3 {
+#  format_up = " %quality"
+#  format_down = "  down"
+#}
 
 battery 0 {
   integer_battery_capacity = true

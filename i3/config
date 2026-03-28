@@ -218,7 +218,7 @@ bindsym $alt+L exec i3lock -i $HOME/Pictures/wallpapers/catppuccin_mint-black-4k
 
 bindsym $alt+b bar mode toggle bar-1
 
-include ~/Documents/GitHub/configs/i3/config.ubuntu
+include ~/.config/i3/config.color
 include ~/Documents/GitHub/configs/i3/autostart
 
 # vim: syntax=i3config:
