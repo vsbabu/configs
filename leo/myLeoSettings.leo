@@ -25,8 +25,10 @@
 <v t="vsbabu.20250916090450.3"><vh>@string manjarogreen = #34be5b</vh></v>
 <v t="vsbabu.20250916090450.4"><vh>@string cupertinoblue = #8fa1b3</vh></v>
 <v t="vsbabu.20250916090450.5"><vh>@string mintgreen = #9ab87c</vh></v>
+<v t="vsbabu.20260321081028.1"><vh>@string mintxgreen = #8bb158</vh></v>
 <v t="vsbabu.20250916090735.1"><vh>@string yaruorange = #e95420</vh></v>
-<v t="vsbabu.20250916090450.6"><vh>@string highlightbg = @manjarogreen</vh></v>
+<v t="vsbabu.20260214093259.1"><vh>@string nordzy = #7e9dbc</vh></v>
+<v t="vsbabu.20250916090450.6"><vh>@string highlightbg = @yaruorange</vh></v>
 <v t="vsbabu.20250916091627.1"><vh>@string highlightfg = #ffffff</vh></v>
 <v t="vsbabu.20250916090450.7"><vh>Color Customizations using variables above</vh>
 <v t="vsbabu.20250916090450.8"><vh>@color body-sel-bg = @highlightbg</vh></v>
@@ -141,5 +143,7 @@ viewrendered.py     # (Or viewrendered3.py) Plugins menu support.
 <t tx="vsbabu.20250916091644.1"></t>
 <t tx="vsbabu.20250916091844.1"></t>
 <t tx="vsbabu.20250916155225.1"></t>
+<t tx="vsbabu.20260214093259.1"></t>
+<t tx="vsbabu.20260321081028.1"></t>
 </tnodes>
 </leo_file>
