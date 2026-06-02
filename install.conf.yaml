@@ -1,0 +1,39 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean: ['~']
+
+- link:
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.leo/myLeoSettings.leo: leo/myLeoSettings.leo
+    ~/.config/foot: foot
+    ~/.config/fuzzel: fuzzel
+    ~/.config/sway: sway
+    ~/.config/waybar:
+       glob: true
+       path: waybar/*
+    ~/.config/fish:
+        glob: true
+        path: fish/*
+    ~/.config/nvim:
+        glob: true
+        path: nvim/*
+    #~/.config/i3:
+    #    glob: true
+    #    path: i3/*
+    #    exclude: [ config/i3/*.md, config/i3/*.png ]
+    ~/.wezterm.lua: wezterm/wezterm.lua
+    ~/.config/wezterm:
+        glob: true
+        path: wezterm/*
+        exclude: [ wezterm/wezterm.lua ]
+    ~/.config/zed: zed
+
+
+- create:
+    - ~/Downloads
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
