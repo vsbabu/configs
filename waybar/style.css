@@ -1,17 +1,18 @@
+@import "frappe.css";
 * {
-    border: none;
-    border-radius: 0;
-    font-family: Inter Light;
+  /* reference the color by using @color-name */
+  color: @text;
     font-family: 'Iosevka';
     font-size: 14px;
     min-height: 0;
 }
+
 window#waybar {
-    background-color: #3d3540;
-    border-bottom: 1px dotted #16a085;  /* #a678d3; */
-    border-top: 1px dotted #16a085;
+  /* you can also GTK3 CSS functions! */
+  background-color: shade(@base, 0.9);
+  border: 2px solid alpha(@crust, 0.3);
+
     padding-top: 5px;
-    color: #16a085; 
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -20,27 +21,16 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
 #workspaces button {
     padding-left: 10px;
     padding-right: 10px;
-    /*padding-top: 5px;
-    padding-bottom: 5px;*/
 
     background-color: transparent;
     color: inherit;
-    font-weight: 600;
+    font-weight: 800;
     border-top: 4px solid transparent;
     border-bottom: 3px solid transparent;
-    border-left: 1px dotted #16a085;
+    border-left: 1px dotted @text;
 
 }
 
@@ -50,22 +40,20 @@ window#waybar.solo {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: alpha(@base, 0.2);
     box-shadow: inherit;
     text-shadow: inherit;
-    border-bottom: 3px solid #16a085;
-    border-top: 3px solid #16a085;
+    border-bottom: 1px solid @text;
+    border-top: 1px solid @text;
 }
 
 #workspaces button.focused {
-    background: rgba(0, 0, 0, 0.2);
+    background: alpha(@teal, 0.2);
 
-    border-top: 3px solid #16a085; /* 9730fd; */
-    border-bottom: 3px solid #16a085;
-    border-left: 1px dotted #16a085;
-    border-right: 1px dotted #16a085;
+    border-left: 1px dotted @text;
+    border-right: 1px dotted @text;
 
-    color: #16a085;
+    color: @text;
 }
 
 #workspaces button.focused + button {
@@ -82,10 +70,10 @@ window#waybar.solo {
 
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
 }
 
-#mpd, #pulseaudio, #network, #cpu, #memory, #temperature, #clock, #window {
+#mpd, #idle_inhibitor, #pulseaudio, #network, #cpu, #backlight, #keyboard-state, #battery, #clock, #tray, #custom-power, #window {
     padding-left: 8px;
     padding-right: 8px;
     /*
@@ -98,15 +86,15 @@ window#waybar.solo {
     font-weight: 600;
     border-top: 4px solid transparent;
     border-bottom: 3px solid transparent;
-    border-left: 1px dotted #16a085;
+    border-left: 1px dotted @text;
 }
 
 #tray {
     padding-left: 8px;
     padding-right:8px;
     min-width: 40px;
-    border-left: 1px dotted #16a085;
-    font-size: 18;
+    border-left: 1px dotted @text;
+    font-size: 18px;
 }
 
 #window {
@@ -124,3 +112,4 @@ window#waybar.solo {
         background-position: 0 0;
     }
 }
+
