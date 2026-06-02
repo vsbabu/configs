@@ -28,8 +28,9 @@ window#waybar.hidden {
     background-color: transparent;
     color: inherit;
     font-weight: 800;
+    border-radius: 0px;
     border-top: 4px solid transparent;
-    border-bottom: 3px solid transparent;
+    border-bottom: 4px solid transparent;
     border-left: 1px dotted @text;
 
 }
@@ -43,31 +44,26 @@ window#waybar.hidden {
     background: alpha(@base, 0.2);
     box-shadow: inherit;
     text-shadow: inherit;
-    border-bottom: 1px solid @text;
-    border-top: 1px solid @text;
-}
-
-#workspaces button.focused {
-    background-color: alpha(@teal, 0.7);
-    border-left: 1px dotted @text;
-    border-right: 1px dotted @text;
+    border-bottom: 1px solid @pink;
+    border-top: 1px solid @pink;
 }
 
 #workspaces button.focused + button {
     border-left: none;
 }
 
-#workspaces button.focused:first-child {
-    border-left: none;
-}
-
 #workspaces button:last-child {
     border-right: 1px dotted @text;
 }
-#workspaces button.focused:last-child {
-    border-right: none;
-}
 
+#workspaces button.focused {
+    border-left: 1px dotted @teal;
+    border-right: 1px dotted @teal;
+    border-bottom: 2px solid @teal;
+}
+#workspaces button.focused:first-child {
+    border-left: 0;
+}
 
 #workspaces button.urgent {
     background-color: @red;

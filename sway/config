@@ -7,14 +7,14 @@
 # │ STARTUP                                                               │
 # ╰───────────────────────────────────────────────────────────────────────╯
 exec waybar
-exec_always swaybg -i ~/Pictures/wallpapers/ai/ai_rainyday_on_engawa_02.jpg -m fill 
+exec_always swaybg -i ~/.wallpaper -m fill
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ VARIABLES                                                             │
 # ╰───────────────────────────────────────────────────────────────────────╯
 set $mod Mod4
 set $term foot
-set $menu fuzzel 
+set $menu fuzzel
 #-f "Iosevka" -w 100 -T foot
 
 

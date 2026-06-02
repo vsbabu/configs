@@ -119,7 +119,7 @@
         "on-click": "resources"
     },
     "memory": {
-        "format": "{}% ", 
+        "format": "{}% ",
         "on-click": "resources -t memory"
     },
     "temperature": {
@@ -207,8 +207,8 @@
 		"menu": "on-click",
 		"menu-file": "/usr/share/waybar/custom_modules/power_menu.xml", // Menu file in resources folder
 		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
+			"shutdown": "systemctl poweroff",
+			"reboot": "systemctl reboot",
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
