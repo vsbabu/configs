@@ -87,6 +87,8 @@ seat * hide_cursor when-typing enable
 # ─── Workspace Assignments ───
 assign [app_id="zen"] workspace number 2
 assign [app_id="zed"] workspace number 3
+assign [app_id="GitHub Desktop"] workspace number 4
+assign [app_id="org.gnome.Rhythmbox3"] workspace number 8
 
 # ─── Focus on Open ───
 for_window [app_id="zed"] focus
@@ -94,6 +96,8 @@ for_window [app_id="zen"] focus
 
 # ─── Floating Windows ───
 for_window [app_id="org.gnome.Nautilus"] floating enable, resize set width 1000 height 600, move position center
+for_window [app_id="GitHub Desktop"] floating enable, resize set width 1000 height 600, move position center
+for_window [app_id="org.gnome.Rhythmbox3"] floating enable, resize set width 1000 height 600, move position right
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ KEYBINDINGS                                                           │
@@ -156,8 +160,10 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # ─── Layout ───
+bindsym $mod+b splith
+bindsym $mod+v splitv
 bindsym $mod+w layout tabbed
-bindsym $mod+V layout toggle split
+bindsym $mod+s layout stacking
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+V floating toggle
 
