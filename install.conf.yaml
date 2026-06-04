@@ -9,6 +9,7 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.leo/myLeoSettings.leo: leo/myLeoSettings.leo
     ~/.config/foot: foot
+    ~/.config/tig: tig
     ~/.config/fuzzel: fuzzel
     ~/.config/sway: sway
     ~/.config/waybar:
