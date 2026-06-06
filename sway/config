@@ -83,21 +83,28 @@ seat * hide_cursor when-typing enable
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ WINDOW RULES                                                          │
+# │ To get app_id, run swaymsg -t get_tree                                │
 # ╰───────────────────────────────────────────────────────────────────────╯
 # ─── Workspace Assignments ───
 assign [app_id="zen"] workspace number 2
+assign [app_id="vivaldi-stable"] workspace number 2
+assign [app_id="microsoft-edge"] workspace number 2
+assign [app_id="helium"] workspace number 2
 assign [app_id="zed"] workspace number 3
 assign [app_id="GitHub Desktop"] workspace number 4
 assign [app_id="org.gnome.Rhythmbox3"] workspace number 8
+assign [app_id="pwsafe"] workspace number 8
 
 # ─── Focus on Open ───
 for_window [app_id="zed"] focus
 for_window [app_id="zen"] focus
+for_window [app_id="pwsafe"] focus
 
 # ─── Floating Windows ───
 for_window [app_id="org.gnome.Nautilus"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="GitHub Desktop"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="org.gnome.Rhythmbox3"] floating enable, resize set width 1000 height 600, move position right
+for_window [app_id="pwsafe"] floating enable, resize set width 600 height 800, move position right
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ KEYBINDINGS                                                           │
