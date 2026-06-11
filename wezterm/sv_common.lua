@@ -137,6 +137,11 @@ function module.apply_to_config(config)
 	config.initial_rows = 28
 	config.initial_cols = 120
 
+	config.window_decorations = "TITLE|RESIZE"
+	config.window_frame = {
+		font = require("wezterm").font("ComicShannsMono Nerd Font"),
+		font_size = 12,
+	}
 	config.ssh_domains = {
 		{
 			name = "dell",
