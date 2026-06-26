@@ -6,7 +6,7 @@
 - clean: ['~']
 
 - link:
-    ~/.tmux.conf: tmux/tmux.conf
+    ~/.config/tmux/tmux.conf: tmux/tmux.conf
     ~/.leo/myLeoSettings.leo: leo/myLeoSettings.leo
     ~/.config/foot: foot
     ~/.config/tig: tig
