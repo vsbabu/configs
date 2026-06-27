@@ -18,11 +18,6 @@ set $menu fuzzel
 #-f "Iosevka" -w 100 -T foot
 
 
-# │ OUTPUT                                                                │
-# ╰───────────────────────────────────────────────────────────────────────╯
-# Run: swaymsg -t get_outputs
-#output "*" bg /home/vsbabu/Pictures/wallpapers/ai/ai_rainyday_on_engawa_02.jpg fill
-
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ INPUT & IDLE                                                          │
 # ╰───────────────────────────────────────────────────────────────────────╯
@@ -38,11 +33,19 @@ input * {
     repeat_rate 60
 }
 
-# Lock after 300s (5min), turn off monitors after 600s (10min), lock before sleep
-# exec swayidle -w \
-#     timeout 300 'swaylock -f' \
-#     timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#     before-sleep 'swaylock -f'
+#  2 min inactivity = display dim
+# +3 min            = display off
+# +5 min            = suspend
+#  before sleep     = lock screen
+set $lock swaylock -f -e -i ~/Pictures/wallpapers/catppuccin_virus.png -s fill --clock --indicator --effect-blur 4x5 --indicator-caps-lock
+exec swayidle -w  \
+        timeout 120 'light -O; light -S 5' resume 'light -I' \
+        timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'  \
+        timeout 600 'systemctl suspend'  \
+        before-sleep "$lock"
+
+#set $lidclose 'systemctl suspend-then-hibernate'
+#bindswitch --reload --locked lid:on exec $lidclose
 
 
 # Basic touchpad settings
@@ -193,3 +196,12 @@ mode "resize" {
 # │ INCLUDES                                                              │
 # ╰───────────────────────────────────────────────────────────────────────╯
 include /etc/sway/config.d/*
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ OUTPUT                                                                │
+# │   added last because /etc/sway/config.d/ includes a wallpaper         │
+# ╰───────────────────────────────────────────────────────────────────────╯
+# To get list of outputs: swaymsg -t get_outputs
+output "*" bg ~/.wallpaper fill
+
+exec ~/.local/bin/set_displays.sh
