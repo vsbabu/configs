@@ -33,16 +33,12 @@ input * {
     repeat_rate 60
 }
 
-#  2 min inactivity = display dim
-# +3 min            = display off
-# +5 min            = suspend
-#  before sleep     = lock screen
-set $lock swaylock -f -e -i ~/Pictures/wallpapers/catppuccin_virus.png -s fill --clock --indicator --effect-blur 4x5 --indicator-caps-lock
-exec swayidle -w  \
-        timeout 120 'light -O; light -S 5' resume 'light -I' \
-        timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'  \
-        timeout 600 'systemctl suspend'  \
-        before-sleep "$lock"
+exec swayidle timeout 300 'swaymsg output \* dpms off' \
+	resume 'swaymsg output \* dpms on' \
+	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+	lock '~/.local/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
+
+bindsym XF86Sleep exec systemctl suspend
 
 #set $lidclose 'systemctl suspend-then-hibernate'
 #bindswitch --reload --locked lid:on exec $lidclose
