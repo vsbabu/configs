@@ -1,0 +1,22 @@
+layout {
+  default_tab_template {
+    children
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+  }
+  cwd "~/Documents/GitHub/vsbabu.org/"
+  pane  split_direction="horizontal" {
+    pane {
+      name    "edit" 
+      focus   true 
+      size    "80%"
+      command "nvim"
+      args    "content/blog"
+    } 
+    pane  split_direction="vertical" {
+      pane name="test" focus=false
+      pane name="gh"   focus=false 
+    }
+  }
+}

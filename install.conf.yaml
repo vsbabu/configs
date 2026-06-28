@@ -31,6 +31,9 @@
         path: wezterm/*
         exclude: [ wezterm/wezterm.lua ]
     ~/.config/zed: zed
+    ~/.config/zellij:
+       glob: true
+       path: zellij/*
 
 
 - create:

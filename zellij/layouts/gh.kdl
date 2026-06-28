@@ -1,0 +1,23 @@
+// usual layout for simple git/or not projects. edit+run+vcs panes
+// you are expected to cd to your project folder before calling this layout
+layout {
+  default_tab_template {
+    children
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+  }
+  pane  split_direction="horizontal" {
+    pane {
+      name    "edit" 
+      focus   true 
+      size    "80%"
+      command "nvim"
+      args    "."
+    } 
+    pane  split_direction="vertical" {
+      pane name="test" focus=false
+      pane name="gh"   focus=false 
+    }
+  }
+}

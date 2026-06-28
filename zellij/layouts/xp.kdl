@@ -1,0 +1,19 @@
+layout {
+  default_tab_template {
+    children
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+  }
+  cwd "~/d/code/study/expenseanalyser/"
+  tab name="edit" split_direction="vertical" {
+    pane edit="index.sql" focus=true
+  }
+  tab name="test" split_direction="horizontal" {
+    pane size="80%" split_direction="vertical" {
+      pane name="local" focus=true
+      pane name="gh" cwd="~/Documents/GitHub/xp"
+    }
+    pane command="gmake" focus=false start_suspended=true
+  }
+}
