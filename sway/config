@@ -162,6 +162,7 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # browsing and coding to external monitor if found
+workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
 
