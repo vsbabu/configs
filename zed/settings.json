@@ -15,8 +15,8 @@
     "dark": "Catppuccin Mocha"
   },
   "theme": {
-    "mode": "dark",
-    "light": "One Light",
+    "mode": "light",
+    "light": "Catppuccin Latte",
     "dark": "One Dark",
   },
   "buffer_font_family": "Iosevka Nerd Font",
