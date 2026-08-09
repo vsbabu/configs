@@ -2,7 +2,7 @@
 # man 5 sway
 #  modified from https://github.com/vyrx-dev/dotfiles.git
 
-
+#
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ STARTUP                                                               │
 # ╰───────────────────────────────────────────────────────────────────────╯
@@ -12,7 +12,7 @@ exec waybar
 # │ VARIABLES                                                             │
 # ╰───────────────────────────────────────────────────────────────────────╯
 set $mod Mod4
-set $term foot
+set $term sway-oneterminal
 set $menu fuzzel
 #-f "Iosevka" -w 100 -T foot
 
@@ -25,29 +25,42 @@ input type:touchpad {
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
+    scroll_method two_finger
+    click_method clickfinger
 }
+
+font pango: "JetBrainsMono Nerd Font 6"
 
 input * {
     repeat_delay 200
     repeat_rate 60
 }
 
+# This is required for locking the system on suspend 
 exec swayidle timeout 300 'swaymsg output \* dpms off' \
 	resume 'swaymsg output \* dpms on' \
 	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
 	lock '~/.local/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
-
 bindsym XF86Sleep exec systemctl suspend
 
-# Basic touchpad settings
-input type:touchpad {
-    tap enabled
-    natural_scroll enabled
-    dwt enabled              # Disable while typing
-    scroll_method two_finger
-    middle_emulation enabled
-    click_method clickfinger
+#NOTE: See https://github.com/rileyrg/linux-init?tab=readme-ov-file#sway-wayland-compositing-tile-manager-----i3swaywmsway
+# -- if wlogout command is installed, show that menu; else, just use swaymsg to have a quick menu on top
+# -- for wlogout, see config/wlogout/layout - that has same options as this
+set $mode_system System (b) blank (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+  bindsym b exec sway-lock-utils blank, mode "default"
+  bindsym l exec sway-lock-utils lock, mode "default"
+  bindsym e exec sway-lock-utils logout, mode "default"
+  bindsym s exec sway-lock-utils suspend, mode "default"
+  bindsym h exec sway-lock-utils hibernate, mode "default"
+  bindsym r exec sway-lock-utils reboot, mode "default"
+  bindsym Shift+s exec sway-lock-utils shutdown, mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
+bindsym Control+Alt+Delete exec command -v wlogout && wlogout || swaymsg 'mode "$mode_system"'
+
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ APPEARANCE & BEHAVIOR                                                 │
@@ -95,6 +108,7 @@ for_window [app_id="zen"] focus
 for_window [app_id="pwsafe"] focus
 
 # ─── Floating Windows ───
+for_window [app_id="pcmanfm"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="org.gnome.Nautilus"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="GitHub Desktop"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="org.gnome.Rhythmbox3"] floating enable, resize set width 1000 height 600, move position right
@@ -106,7 +120,7 @@ for_window [app_id="pwsafe"] floating enable, resize set width 600 height 800, m
 # ─── Core Applications ───
 bindsym $mod+Return exec $term
 bindsym $mod+Space exec $menu
-bindsym $mod+e exec nautilus
+bindsym $mod+e exec pcmanfm
 bindsym $mod+q kill
 
 bindsym --locked XF86PowerOff exec systemctl suspend | swaylock
@@ -198,6 +212,7 @@ include /etc/sway/config.d/*
 # │   added last because /etc/sway/config.d/ includes a wallpaper         │
 # ╰───────────────────────────────────────────────────────────────────────╯
 # To get list of outputs: swaymsg -t get_outputs
-output "*" bg ~/.wallpaper fill
+# I use greyline now for wallpaper https://github.com/cothinking-dev/greyline
+#output "*" bg ~/.wallpaper fill
 
 exec ~/.local/bin/set_displays.sh

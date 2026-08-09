@@ -31,6 +31,7 @@
         glob: true
         path: wezterm/*
         exclude: [ wezterm/wezterm.lua ]
+    ~/.config/wlogout: wlogout
     ~/.config/zed: zed
     ~/.config/zellij:
        glob: true
