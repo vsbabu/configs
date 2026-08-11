@@ -15,11 +15,11 @@
     "dark": "Catppuccin Mocha"
   },
   "theme": {
-    "mode": "light",
-    "light": "Catppuccin Latte",
-    "dark": "One Dark",
+    "mode": "system",
+    "light": "Catppuccin Latte (teal)",
+    "dark": "Catppuccin Frappé (teal)",
   },
-  "buffer_font_family": "Iosevka Nerd Font",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "ui_font_family": "Victor Mono",
   "ui_font_size": 16,
   "buffer_font_size": 16,
