@@ -12,9 +12,12 @@ exec waybar
 # │ VARIABLES                                                             │
 # ╰───────────────────────────────────────────────────────────────────────╯
 set $mod Mod4
-set $term sway-oneterminal
+set $term sway-kitty
 set $menu fuzzel
 #-f "Iosevka" -w 100 -T foot
+
+set $DISPE HDMI-A-1
+set $DISPI eDP-1
 
 
 # ╭───────────────────────────────────────────────────────────────────────╮
@@ -29,37 +32,21 @@ input type:touchpad {
     click_method clickfinger
 }
 
-font pango: "JetBrainsMono Nerd Font 6"
-
 input * {
     repeat_delay 200
     repeat_rate 60
 }
 
 # This is required for locking the system on suspend 
-exec swayidle timeout 300 'swaymsg output \* dpms off' \
-	resume 'swaymsg output \* dpms on' \
-	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-	lock '~/.local/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
+#exec swayidle timeout 300 'swaymsg output \* dpms off' \
+#	resume 'swaymsg output \* dpms on' \
+#	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+#	lock 'swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
+
+exec sway-idle
+
 bindsym XF86Sleep exec systemctl suspend
 
-#NOTE: See https://github.com/rileyrg/linux-init?tab=readme-ov-file#sway-wayland-compositing-tile-manager-----i3swaywmsway
-# -- if wlogout command is installed, show that menu; else, just use swaymsg to have a quick menu on top
-# -- for wlogout, see config/wlogout/layout - that has same options as this
-set $mode_system System (b) blank (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-  bindsym b exec sway-lock-utils blank, mode "default"
-  bindsym l exec sway-lock-utils lock, mode "default"
-  bindsym e exec sway-lock-utils logout, mode "default"
-  bindsym s exec sway-lock-utils suspend, mode "default"
-  bindsym h exec sway-lock-utils hibernate, mode "default"
-  bindsym r exec sway-lock-utils reboot, mode "default"
-  bindsym Shift+s exec sway-lock-utils shutdown, mode "default"
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-bindsym Control+Alt+Delete exec command -v wlogout && wlogout || swaymsg 'mode "$mode_system"'
 
 
 # ╭───────────────────────────────────────────────────────────────────────╮
@@ -73,7 +60,8 @@ smart_gaps on
 default_border pixel 2
 default_floating_border pixel 2
 
-font pango:DejaVu Sans Mono 9
+#font pango:DejaVu Sans Mono 9
+font pango:JetBrains Mono Nerd 9
 titlebar_border_thickness 0
 titlebar_padding 3
 hide_edge_borders --i3 smart
@@ -120,15 +108,30 @@ for_window [app_id="pwsafe"] floating enable, resize set width 600 height 800, m
 # ─── Core Applications ───
 bindsym $mod+Return exec $term
 bindsym $mod+Space exec $menu
-bindsym $mod+e exec pcmanfm
+bindsym $mod+e exec nautilus
 bindsym $mod+q kill
 
 bindsym --locked XF86PowerOff exec systemctl suspend | swaylock
 
 # ─── Session & Power ───
-bindsym $mod+Alt+l exec ~/.local/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'
+#NOTE: See https://github.com/rileyrg/linux-init?tab=readme-ov-file#sway-wayland-compositing-tile-manager-----i3swaywmsway
+# -- if wlogout command is installed, show that menu; else, just use swaymsg to have a quick menu on top
+# -- for wlogout, see config/wlogout/layout - that has same options as this
+set $mode_system System (b) blank (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+  bindsym b exec sway-lock-utils blank, mode "default"
+  bindsym l exec sway-lock-utils lock, mode "default"
+  bindsym e exec sway-lock-utils logout, mode "default"
+  bindsym s exec sway-lock-utils suspend, mode "default"
+  bindsym h exec sway-lock-utils hibernate, mode "default"
+  bindsym r exec sway-lock-utils reboot, mode "default"
+  bindsym Shift+s exec sway-lock-utils shutdown, mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym Control+Alt+Delete exec command -v wlogout && wlogout || swaymsg 'mode "$mode_system"'
 
 # ─── Hardware Keys ───
 bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -175,9 +178,9 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # browsing and coding to external monitor if found
-workspace 1 output HDMI-A-1
-workspace 2 output HDMI-A-1
-workspace 3 output HDMI-A-1
+#workspace 1 output $DISPE
+#workspace 2 output $DISPE
+#workspace 3 output $DISPE
 
 # ─── Layout ───
 bindsym $mod+b splith
@@ -215,4 +218,8 @@ include /etc/sway/config.d/*
 # I use greyline now for wallpaper https://github.com/cothinking-dev/greyline
 #output "*" bg ~/.wallpaper fill
 
-exec ~/.local/bin/set_displays.sh
+exec set_displays.sh
+
+exec greyline
+workspace 1
+exec $term

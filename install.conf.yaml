@@ -10,6 +10,7 @@
     ~/.leo/myLeoSettings.leo: leo/myLeoSettings.leo
     ~/.config/environment.d: environment.d
     ~/.config/foot: foot
+    ~/.config/kitty: kitty
     ~/.config/bat: bat
     ~/.config/tig: tig
     ~/.config/fuzzel: fuzzel
