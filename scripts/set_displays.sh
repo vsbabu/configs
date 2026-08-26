@@ -49,9 +49,9 @@ get_external_monitor_shift() {
   local monitor_name="$1"
   local dimension="$2"
   if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-    wlr-randr --json | jq ".[]|select(.name == \"${MONITORS[$i]}\")|.modes[]|select(.current)|.${dimension}"
+    wlr-randr --json | jq ".[]|select(.name == \"${monitor_name}\")|.modes[]|select(.current)|.${dimension}"
   else
-    xrandr -q | jc xrandr | jq ".screens[].devices[]|select(.device_name == \"${MONITORS[$i]}\")|.resolution_modes[]|select(.frequencies[].is_current)|.resolution_${dimension}"
+    xrandr -q | jc xrandr | jq ".screens[].devices[]|select(.device_name == \"${monitor_name}\")|.resolution_modes[]|select(.frequencies[].is_current)|.resolution_${dimension}"
   fi
 }
 
@@ -62,21 +62,39 @@ grep -ic open /proc/acpi/button/lid/LID0/state >/dev/null
 LID_CLOSED=$?
 
 for i in "${!MONITORS[@]}"; do
-  #echo "Index: $i, Value: ${MONITORS[$i]}"
+  echo "Index: $i, Value: ${MONITORS[$i]}"
   if [ $i -eq 0 ]; then
     if [ $LID_CLOSED -eq 1 ]; then
-      $CMD_RANDR --output "${MONITORS[$i]}" --off
+      (
+        set -x
+        $CMD_RANDR --output "${MONITORS[$i]}" --off
+      )
     else
-      $CMD_RANDR --output "${MONITORS[$i]}" --on --scale $SCALE_RANDR
+      (
+        set -x
+        $CMD_RANDR --output "${MONITORS[$i]}" --on --scale $SCALE_RANDR
+      )
     fi
     continue
   else
-    $CMD_RANDR --output "${MONITORS[$i]}" --on
+    (
+      set -x
+      $CMD_RANDR --output "${MONITORS[$i]}" --on
+    )
   fi
-  p=$((i - 1))
-  # find current monitor's resolution, push previous monitor down by that much height
-  # for left side stacking, use width and $SHIFT,0
-  SHIFT=$(get_external_monitor_shift "${MONITORS[$i]}" width)
-  PREV_POSITION_FROM_CURRENT="--pos $SHIFT,0"
-  $CMD_RANDR --output "${MONITORS[$p]}" $PREV_POSITION_FROM_CURRENT "${MONITORS[$i]}"
+  if [ $LID_CLOSED -ne 1 ]; then
+    # default is right side stacking; ie., external monitor is to the right of laptop
+    # if that is the case, just ignore rest of this block - otherwise, comment out continue line below
+    continue
+    # for ext monitor on top, find current monitor's resolution, push previous monitor down by that much height
+    # for left side stacking:
+    # get how much X should previous screen should be pushed left - width
+    #  for ext monitor on top of laptop, change width to height and --pos $SHIFT,0 to --pos 0,$HEIGHT
+    SHIFT=$(get_external_monitor_shift "${MONITORS[$i]}" width)
+    PREV_POSITION_FROM_CURRENT="--pos $SHIFT,0"
+    (
+      set -x
+      $CMD_RANDR --output "${MONITORS[$p]}" $PREV_POSITION_FROM_CURRENT "${MONITORS[$i]}"
+    )
+  fi
 done
