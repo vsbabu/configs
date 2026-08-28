@@ -14,7 +14,6 @@ exec waybar
 set $mod Mod4
 set $term foot
 set $menu fuzzel
-#-f "Iosevka" -w 100 -T foot
 
 set $DISPE HDMI-A-1
 set $DISPI eDP-1
@@ -96,6 +95,8 @@ for_window [app_id="zen"] focus
 for_window [app_id="pwsafe"] focus
 
 # ─── Floating Windows ───
+for_window [app_id="floating_shell"] floating enable, resize set 800 900, move position center
+
 for_window [app_id="pcmanfm"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="org.gnome.Nautilus"] floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="GitHub Desktop"] floating enable, resize set width 1000 height 600, move position center
@@ -176,6 +177,16 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
+
+# ─── Move Workspace to monitor ───
+bindsym $mod+Ctrl+Shift+Left  move workspace to output left
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+bindsym $mod+Ctrl+Shift+h  move workspace to output left
+bindsym $mod+Ctrl+Shift+l move workspace to output right
+bindsym $mod+Ctrl+Shift+k move workspace to output up
+bindsym $mod+Ctrl+Shift+j move workspace to output down
 
 # browsing and coding to external monitor if found
 #workspace 1 output $DISPE

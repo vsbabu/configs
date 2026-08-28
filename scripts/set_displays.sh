@@ -85,7 +85,7 @@ for i in "${!MONITORS[@]}"; do
   if [ $LID_CLOSED -ne 1 ]; then
     # default is right side stacking; ie., external monitor is to the right of laptop
     # if that is the case, just ignore rest of this block - otherwise, comment out continue line below
-    continue
+    #continue
     # for ext monitor on top, find current monitor's resolution, push previous monitor down by that much height
     # for left side stacking:
     # get how much X should previous screen should be pushed left - width
