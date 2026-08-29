@@ -1,0 +1,2 @@
+# shortcut for bat based pager; not an alias for future enhancements
+bat --paging=always --pager="less -FR +G" "$@"

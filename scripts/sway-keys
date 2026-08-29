@@ -1,0 +1,5 @@
+#!/bin/bash
+O=$(mktemp)
+cat ~/.config/sway/config | grep "bindsym" | sed 's/bindsym//g' >$O
+bess $O
+rm $O
