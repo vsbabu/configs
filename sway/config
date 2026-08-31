@@ -1,23 +1,23 @@
 # Sway Configuration
 # man 5 sway
 #  modified from https://github.com/vyrx-dev/dotfiles.git
-
+#  See https://github.com/rileyrg/linux-init?tab=readme-ov-file#sway-wayland-compositing-tile-manager-----i3swaywmsway
+#      for a fantastic .org file; many of the configs and scripts used in this are copied from that.
 #
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ STARTUP                                                               │
 # ╰───────────────────────────────────────────────────────────────────────╯
+# see ../config/waybar/config.jsonc
 exec waybar
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ VARIABLES                                                             │
 # ╰───────────────────────────────────────────────────────────────────────╯
 set $mod Mod4
+set $mod1 Mod1
 set $term foot
 set $menu fuzzel
-
-set $DISPE HDMI-A-1
-set $DISPI eDP-1
-
+set $laptop_display eDP-1
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ INPUT & IDLE                                                          │
@@ -30,7 +30,6 @@ input type:touchpad {
     scroll_method two_finger
     click_method clickfinger
 }
-
 input * {
     repeat_delay 200
     repeat_rate 60
@@ -42,36 +41,29 @@ input * {
 #	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
 #	lock 'swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
 
+#see ../scripts/sway-idle
 exec sway-idle
-
 bindsym XF86Sleep exec systemctl suspend
-
-
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ APPEARANCE & BEHAVIOR                                                 │
 # ╰───────────────────────────────────────────────────────────────────────╯
 # Border colors: black-metal theme
 client.focused #718096 #404552 #f7fafc #718096 #718096
-
 gaps inner 5
 smart_gaps on
 default_border pixel 2
 default_floating_border pixel 2
-
-#font pango:DejaVu Sans Mono 9
 font pango:JetBrains Mono Nerd 9
 titlebar_border_thickness 0
 titlebar_padding 3
 hide_edge_borders --i3 smart
-
 workspace_auto_back_and_forth yes
 focus_on_window_activation focus
 floating_modifier $mod normal
 focus_on_window_activation urgent
 focus_wrapping no
 mouse_warping output
-
 seat * hide_cursor 8000
 seat * hide_cursor when-typing enable
 
@@ -80,45 +72,43 @@ seat * hide_cursor when-typing enable
 # │ To get app_id, run swaymsg -t get_tree                                │
 # ╰───────────────────────────────────────────────────────────────────────╯
 # ─── Workspace Assignments ───
-assign [app_id="zen"] workspace number 2
-assign [app_id="vivaldi-stable"] workspace number 2
-assign [app_id="microsoft-edge"] workspace number 2
-assign [app_id="helium"] workspace number 2
-assign [app_id="zed"] workspace number 3
-assign [app_id="GitHub Desktop"] workspace number 4
-assign [app_id="org.gnome.Rhythmbox3"] workspace number 8
-assign [app_id="pwsafe"] workspace number 8
-
+assign [app_id="zen"]             workspace number 2
+assign [app_id="vivaldi-stable"]  workspace number 2
+assign [app_id="microsoft-edge"]  workspace number 2
+assign [app_id="helium"]          workspace number 2
+assign [app_id="zed"]             workspace number 3
+assign [app_id="GitHub Desktop"]  workspace number 4
+assign [app_id="org.gnome.Rhythmbox3"]  workspace number 8
+assign [app_id="pwsafe"]                workspace number 8
 # ─── Focus on Open ───
-for_window [app_id="zed"] focus
-for_window [app_id="zen"] focus
-for_window [app_id="pwsafe"] focus
-
+for_window [app_id="zed"]     focus
+for_window [app_id="zen"]     focus
+for_window [app_id="pwsafe"]  focus
 # ─── Floating Windows ───
-for_window [app_id="floating_shell"] floating enable, resize set 800 900, move position center
-
-for_window [app_id="pcmanfm"] floating enable, resize set width 1000 height 600, move position center
-for_window [app_id="org.gnome.Nautilus"] floating enable, resize set width 1000 height 600, move position center
-for_window [app_id="GitHub Desktop"] floating enable, resize set width 1000 height 600, move position center
-for_window [app_id="org.gnome.Rhythmbox3"] floating enable, resize set width 1000 height 600, move position right
-for_window [app_id="pwsafe"] floating enable, resize set width 600 height 800, move position right
+for_window [app_id="org.gnome.Nautilus"]    floating enable, resize set width 1000 height 600, move position center
+for_window [app_id="GitHub Desktop"]        floating enable, resize set width 1000 height 600, move position center
+for_window [app_id="org.gnome.Rhythmbox3"]  floating enable, resize set width 1000 height 600, move position right
+for_window [app_id="pwsafe"]                floating enable, resize set width 600 height 800, move position right
+# see ../scripts/sway-popup-tui
+for_window [app_id="floating_shell"] floating enable, border pixel 4, move position center     
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ KEYBINDINGS                                                           │
 # ╰───────────────────────────────────────────────────────────────────────╯
 # ─── Core Applications ───
+# this works only with foot terminal; for other terminals
+bindsym $mod+k exec sway-popup-tui sway-keys  #see ../scripts/sway-keys
 bindsym $mod+Return exec $term
+# since zen is always on workspace 2, open a new tab, grab focus and move to workspace 2
+bindsym $mod+Shift+Return exec zen --new-tab about:newtab; exec swaymsg [app_id="zen"] focus, workspace 2
 bindsym $mod+Space exec $menu
 bindsym $mod+e exec nautilus
 bindsym $mod+q kill
-
 bindsym --locked XF86PowerOff exec systemctl suspend | swaylock
-
 # ─── Session & Power ───
 bindsym $mod+Shift+c reload
-#NOTE: See https://github.com/rileyrg/linux-init?tab=readme-ov-file#sway-wayland-compositing-tile-manager-----i3swaywmsway
 # -- if wlogout command is installed, show that menu; else, just use swaymsg to have a quick menu on top
-# -- for wlogout, see config/wlogout/layout - that has same options as this
+# -- for wlogout, see ../config/wlogout/layout - that has same options as this
 set $mode_system System (b) blank (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
   bindsym b exec sway-lock-utils blank, mode "default"
@@ -132,26 +122,25 @@ mode "$mode_system" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-bindsym Control+Alt+Delete exec command -v wlogout && wlogout || swaymsg 'mode "$mode_system"'
-
+bindsym $mod+Escape  exec command -v wlogout && wlogout || swaymsg 'mode "$mode_system"'
 # ─── Hardware Keys ───
-bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioMute        exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-
+bindsym --locked XF86AudioMicMute     exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 # ─── Window Focus ───
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
+bindsym $mod+Left   focus left
+bindsym $mod+Down   focus down
+bindsym $mod+Up     focus up
+bindsym $mod+Right  focus right
+# simulate alt-tab within a container
+bindsym $mod1+Tab       focus next
+bindsym $mod1+Shift+Tab focus prev
 # ─── Window Movement ───
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
+bindsym $mod+Shift+Left   move left
+bindsym $mod+Shift+Down   move down
+bindsym $mod+Shift+Up     move up
+bindsym $mod+Shift+Right  move right
 # ─── Workspace Navigation ───
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -163,9 +152,8 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
-bindsym Alt+K workspace next
-bindsym Alt+J workspace prev
-
+bindsym $mod1+K workspace next
+bindsym $mod1+J workspace prev
 # ─── Move to Workspace ───
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
@@ -177,36 +165,27 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-
 # ─── Move Workspace to monitor ───
 bindsym $mod+Ctrl+Shift+Left  move workspace to output left
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
-bindsym $mod+Ctrl+Shift+Up move workspace to output up
-bindsym $mod+Ctrl+Shift+Down move workspace to output down
-bindsym $mod+Ctrl+Shift+h  move workspace to output left
-bindsym $mod+Ctrl+Shift+l move workspace to output right
-bindsym $mod+Ctrl+Shift+k move workspace to output up
-bindsym $mod+Ctrl+Shift+j move workspace to output down
-
-# browsing and coding to external monitor if found
-#workspace 1 output $DISPE
-#workspace 2 output $DISPE
-#workspace 3 output $DISPE
-
+bindsym $mod+Ctrl+Shift+Up    move workspace to output up
+bindsym $mod+Ctrl+Shift+Down  move workspace to output down
+bindsym $mod+Ctrl+Shift+h     move workspace to output left
+bindsym $mod+Ctrl+Shift+l     move workspace to output right
+bindsym $mod+Ctrl+Shift+k     move workspace to output up
+bindsym $mod+Ctrl+Shift+j     move workspace to output down
 # ─── Layout ───
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+w layout tabbed
 bindsym $mod+s layout stacking
-bindsym $mod+f fullscreen
-bindsym $mod+Shift+V floating toggle
-
+bindsym $mod+Shift+F fullscreen
+bindsym $mod+Shift+T floating toggle
 # ─── Scratchpad ───
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
-
 # ─── Resize Mode ───
-bindsym $mod+Alt+r mode "resize"
+bindsym $mod+$mod1+r mode "resize"
 mode "resize" {
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
@@ -224,13 +203,32 @@ include /etc/sway/config.d/*
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ OUTPUT                                                                │
 # │   added last because /etc/sway/config.d/ includes a wallpaper         │
+# │     To get list of outputs: swaymsg -t get_outputs                    │
 # ╰───────────────────────────────────────────────────────────────────────╯
-# To get list of outputs: swaymsg -t get_outputs
-# I use greyline now for wallpaper https://github.com/cothinking-dev/greyline
-#output "*" bg ~/.wallpaper fill
+output $laptop_display {
+    mode 3200x2000@90Hz
+    position 2560,0
+    scale 1.5
+    bg ~/Pictures/wallpapers/greyline.png fill
+    #see ../config/greyline/greyline.toml ; command=
+}
 
-exec set_displays.sh
+output HDMI-A-1 {
+    mode 2560x1440@143.999Hz
+    position 0,0
+    bg ~/Pictures/wallpapers/a-kanagawa-grids.png fill
+}
 
-exec greyline
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ LAPTOP LID CLOSE                                                      │
+# ╰───────────────────────────────────────────────────────────────────────╯
+# when laptop is closed, I want all windows from that screen on external monitor
+# ideally, swaylock on lid:on when external monitor is not connected
+bindswitch lid:on output $laptop_display disable
+bindswitch lid:off output $laptop_display enable
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ STARTUP                                                               │
+# ╰───────────────────────────────────────────────────────────────────────╯
 workspace 1
 exec $term

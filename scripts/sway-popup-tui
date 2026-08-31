@@ -2,8 +2,7 @@
 foot --app-id="floating_shell" \
   -f "ComicShannsMono Nerd Font:size=10" \
   -T "Info" \
-  -W 80x72 \
+  -W 80x60 \
   sh -c "$@"
-
 
 #TODO: enable passing of T and W
