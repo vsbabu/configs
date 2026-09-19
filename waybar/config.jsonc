@@ -19,7 +19,6 @@
         "mpd",
         "idle_inhibitor",
         "pulseaudio",
-        "keyboard-state",
         "network",
         "cpu",
         "memory",
@@ -49,6 +48,7 @@
             "default": ""
         }
     },
+    // this doesn't work 
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -58,8 +58,10 @@
             "unlocked": ""
         }
     },
+    // this also doesn't show anything
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+      // "format": " {}",
+      "format": "<span style=\"italic\">{}</span>"
     },
     "sway/scratchpad": {
         "format": "{icon} {count}",
@@ -110,7 +112,7 @@
         // }
     },
     "clock": {
-        "format-alt": "{:%I:%M}",
+        "format": "{:%a %d/%m %I:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d %H:%M:%S %Z}"
     },
@@ -152,7 +154,7 @@
         "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
     },
     "power-profiles-daemon": {
-      "format": "{icon}",
+      "format": " {icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
@@ -173,11 +175,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format": "{icon} {format_source}",
+        "format-bluetooth": "{icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -205,14 +207,5 @@
     "custom/power": {
       "format" : "⏻ ",
       "on-click" : "wlogout"
-      //"tooltip": false,
-      //"menu": "on-click",
-      //"menu-file": "/usr/share/waybar/custom_modules/power_menu.xml", // Menu file in resources folder
-      //"menu-actions": {
-      //  "shutdown": "systemctl poweroff",
-      //  "reboot": "systemctl reboot",
-      //  "suspend": "systemctl suspend",
-      //  "hibernate": "systemctl hibernate"
-      //}
     }
 }

@@ -59,6 +59,11 @@ if $TO_DARK; then
   sed -i --follow-symlinks "s/latte/frappe/g" ~/.config/tmux/tmux.conf
   sed -i --follow-symlinks "s/latte/frappe/g" ~/.config/waybar/style.css
   sed -i --follow-symlinks "s/latte/frappe/g" ~/.config/fuzzel/fuzzel.ini
+  cd ~/.config/swaync/
+  rm style.css
+  ln -s catppuccin-frappe.css style.css
+  pgrep swaync && swaync-client --reload-config --reload-css
+  cd -
   kitten themes "Catppuccin-Frappe"
   case "$XDG_SESSION_DESKTOP" in
   "KDE")
@@ -97,6 +102,11 @@ else
   sed -i --follow-symlinks "s/frappe/latte/g" ~/.config/waybar/style.css
   sed -i --follow-symlinks "s/frappe/latte/g" ~/.config/fuzzel/fuzzel.ini
   kitten themes "Catppuccin-Latte"
+  cd ~/.config/swaync/
+  rm style.css
+  ln -s catppuccin-latte.css style.css
+  pgrep swaync && swaync-client --reload-config --reload-css
+  cd -
   case "$XDG_SESSION_DESKTOP" in
   "KDE")
     lookandfeeltool -a org.kde.breeze.desktop

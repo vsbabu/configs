@@ -9,6 +9,7 @@
 # ╰───────────────────────────────────────────────────────────────────────╯
 # see ../config/waybar/config.jsonc
 exec waybar
+exec swaync
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ VARIABLES                                                             │
@@ -73,11 +74,11 @@ seat * hide_cursor when-typing enable
 # ╰───────────────────────────────────────────────────────────────────────╯
 # ─── Workspace Assignments ───
 assign [app_id="zen"]             workspace number 2
-assign [app_id="vivaldi-stable"]  workspace number 2
 assign [app_id="microsoft-edge"]  workspace number 2
 assign [app_id="helium"]          workspace number 2
 assign [app_id="zed"]             workspace number 3
 assign [app_id="GitHub Desktop"]  workspace number 4
+assign [app_id="vivaldi-stable"]  workspace number 8
 assign [app_id="org.gnome.Rhythmbox3"]  workspace number 8
 assign [app_id="pwsafe"]                workspace number 8
 # ─── Focus on Open ───
@@ -87,10 +88,11 @@ for_window [app_id="pwsafe"]  focus
 # ─── Floating Windows ───
 for_window [app_id="org.gnome.Nautilus"]    floating enable, resize set width 1000 height 600, move position center
 for_window [class="GitHub Desktop"]         floating enable, resize set width 1000 height 600, move position center
-for_window [app_id="org.gnome.Rhythmbox3"]  floating enable, resize set width 1000 height 600, move position right
 for_window [app_id="pwsafe"]                floating enable, resize set width 600 height 800, move position right
+for_window [app_id="org.pulseaudio.pavucontrol"]  floating enable, resize set width 1000 height 600, move position right
+for_window [app_id="org.gnome.Rhythmbox3"]  floating enable, resize set width 1000 height 600, move position right
 # see ../scripts/sway-popup-tui
-for_window [app_id="floating_shell"] floating enable, border pixel 4, move position center     
+for_window [app_id="floating_shell"] floating enable, border pixel 4, move position center
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ KEYBINDINGS                                                           │
@@ -105,6 +107,7 @@ bindsym $mod+Space exec $menu
 bindsym $mod+e exec nautilus
 bindsym $mod+q kill
 bindsym --locked XF86PowerOff exec systemctl suspend | swaylock
+bindsym $mod+Shift+n exec swaync-client -t -sw
 # ─── Session & Power ───
 bindsym $mod+Shift+c reload
 # -- if wlogout command is installed, show that menu; else, just use swaymsg to have a quick menu on top
