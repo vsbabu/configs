@@ -89,6 +89,7 @@ for_window [app_id="pwsafe"]  focus
 for_window [app_id="org.gnome.Nautilus"]    floating enable, resize set width 1000 height 600, move position center
 for_window [class="GitHub Desktop"]         floating enable, resize set width 1000 height 600, move position center
 for_window [app_id="pwsafe"]                floating enable, resize set width 600 height 800, move position right
+for_window [app_id="wdisplays"]                floating enable, resize set width 600 height 800, move position right
 for_window [app_id="org.pulseaudio.pavucontrol"]  floating enable, resize set width 1000 height 600, move position right
 for_window [app_id="org.gnome.Rhythmbox3"]  floating enable, resize set width 1000 height 600, move position right
 # see ../scripts/sway-popup-tui
@@ -212,14 +213,14 @@ output $laptop_display {
     mode 3200x2000@90Hz
     position 2560,0
     scale 1.5
-    bg ~/Pictures/wallpapers/greyline.png fill
+    bg ~/Pictures/wallpapers/a-kanagawa-grids.png fill
     #see ../config/greyline/greyline.toml ; command=
 }
 
 output HDMI-A-1 {
     mode 2560x1440@143.999Hz
     position 0,0
-    bg ~/Pictures/wallpapers/a-kanagawa-grids.png fill
+    bg ~/Pictures/wallpapers/kate-hazen-fractal-mountains.png fill
 }
 
 # ╭───────────────────────────────────────────────────────────────────────╮
