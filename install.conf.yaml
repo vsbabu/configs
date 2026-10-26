@@ -12,6 +12,7 @@
     ~/.config/foot: foot
     ~/.config/kitty: kitty
     ~/.config/bat: bat
+    ~/.config/eza: eza
     ~/.config/tig: tig
     ~/.config/fuzzel: fuzzel
     ~/.config/sway: sway
