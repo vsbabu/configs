@@ -17,7 +17,7 @@
   "theme": {
     "mode": "system",
     "light": "Catppuccin Latte (teal)",
-    "dark": "Catppuccin Frappé (teal)",
+    "dark": "Everforest Dark Medium (blur)",
   },
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "ui_font_family": "Victor Mono",
